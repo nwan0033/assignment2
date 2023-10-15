@@ -1,0 +1,56 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 700,
+    "height": 300,
+    "title": {"text": ""},
+
+    "data": {
+
+        "url": "https://raw.githubusercontent.com/nwan0033/data_vis_II/main/global-data-on-sustainable-energy.csv"
+    },
+
+    "transform": [
+        {
+            "aggregate": [{
+                "op": "mean",
+                "field": "Renewable-electricity-generating-capacity-per-capita",
+                "as": "Mean Renewable Electricity Generating Capacity"
+            }],
+            "groupby": ["Entity"]
+        },
+        {
+              "window": [{"op": "rank", "as": "rank"}],
+              "sort": [{"field": "Mean Renewable Electricity Generating Capacity", "order": "descending"}]
+            },
+            {"filter": "datum.rank <= 10"}
+    ],
+
+    "encoding": {
+        "x": {"field": "Entity", "type": "nominal", "title": "Country", "sort": { "encoding": "y", "order": "descending" }},
+        "y": {"field": "Mean Renewable Electricity Generating Capacity", "type": "quantitative"}
+    },
+
+    "layer": [
+        {
+        "mark": "bar",
+        "encoding": {
+            "color": {
+                "field": "Entity",
+                "title": "Country",
+                "type": "nominal"
+            },
+            "tooltip": [
+                {"field": "Mean Renewable Electricity Generating Capacity", 
+                "type": "quantitative",
+                "title": "Mean Capacity",
+                "format": ".2f"
+            },
+                {"field": "Entity", 
+                "type": "nominal", 
+                "title": "Country"
+            }
+            ]
+        }
+    }
+]
+}
