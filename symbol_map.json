@@ -50,7 +50,7 @@
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/nwan0033/data_vis_II/main/global-data-on-sustainable-energy.csv"
+        "url": "https://raw.githubusercontent.com/nwan0033/assignment2/main/global-data-on-sustainable-energy.csv"
       },
       "transform": [
         {
